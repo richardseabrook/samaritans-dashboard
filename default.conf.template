@@ -1,0 +1,30 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+	index index.html;
+	server_name _;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+	location = /events.json {
+		proxy_set_header Authorization "APIKEY ${3R_API_KEY}";
+		proxy_pass https://www.3r.org.uk/events.json;
+	}
+	location = /stats/export_rotas.json {
+		proxy_set_header Authorization "APIKEY ${3R_API_KEY}";
+		proxy_pass https://www.3r.org.uk/stats/export_rotas.json;
+	}
+	location = /wiki/branchcommsscreens/all_pages.json {
+		proxy_set_header Authorization "APIKEY ${3R_API_KEY}";
+		proxy_pass https://www.3r.org.uk/wiki/branchcommsscreens/all_pages.json;
+	}
+	location /intranet/status/ {
+		proxy_pass https://dashboard.samaritans.org/intranet/status/;
+	}
+	location /static/ {
+		proxy_pass https://dashboard.samaritans.org/static/;
+	}
+}

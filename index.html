@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Samaritans Dashboard</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="css/uikit.min.css" />
+        <script src="js/moment.min.js"></script>
+        <script src="js/uikit.min.js"></script>
+        <script src="js/uikit-icons.min.js"></script>
+        <script src="js/vue.global.prod.js"></script>
+    </head>
+    <body>
+        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+            <div class="uk-navbar-left">
+                <svg id="logo" height="55px" width="206px" focusable="false" class="uk-navbar-item uk-logo" viewBox="0 0 212.7 56.7">
+                    <title>Samaritans</title>
+                    <path fill="#8BBE29" d="M20.4,0v8.8c0,1-0.8,1.7-1.7,1.7c-1,0-1.7-0.8-1.7-1.7V0H0v56.7h192.3v-8.8c0-1,0.8-1.7,1.7-1.7c1,0,1.7,0.8,1.7,1.7v8.8h17V0H20.4z"></path>
+                    <path fill="#fff" d="M111.4,30.1c1.6-0.5,2.4-1.5,3-2.5s0.9-2.1,0.9-3.4c0-2.1-0.7-3.8-2.1-5s-3.4-1.8-5.8-1.8h-6.3c-1,0-1.7,0.7-1.7,1.7V39h4.6v-7.7h2.5c0.2,0,0.5,0,0.8,0L112,39h5.1L111.4,30.1z M110.7,24.3c0,2.2-1.4,3.2-4.2,3.2h-2.6V21h2.6C109.3,21.1,110.7,22.1,110.7,24.3"></path>
+                    <path fill="#fff" d="M120.9,17.4c-1,0-1.7,0.7-1.7,1.7V39h4.6V17.4H120.9z"></path>
+                    <path fill="#fff" d="M168.5,17.4H166c-1,0-1.7,0.7-1.7,1.7V39h4.4V24.8L179.6,39h4V17.4h-4.4v14L168.5,17.4z"></path>
+                    <path fill="#fff" d="M143.9,17.4h-16.2c-1,0-1.7,0.7-1.7,1.7v2.1h6.6V39h4.6V21.2h6.7L143.9,17.4L143.9,17.4z"></path>
+                    <path fill="#fff" d="M44.1,39H49l-8.5-21.5v-0.1h-4.7l-8.5,21.4L27.1,39h4.6l1.9-5.3h8.5L44.1,39z M35.1,29.9l2.8-7.7l2.8,7.7C40.7,29.9,35.1,29.9,35.1,29.9z"></path>
+                    <path fill="#fff" d="M92.4,39h4.9l-8.5-21.5v-0.1H84L75.4,39H80l1.9-5.3h8.5L92.4,39z M83.4,29.9l2.8-7.7l2.8,7.7C89,29.9,83.4,29.9,83.4,29.9z"></path>
+                    <path fill="#fff" d="M157.4,39h4.9l-8.5-21.5v-0.1H149l-8.5,21.4l-0.1,0.2h4.6l1.9-5.3h8.5L157.4,39z M148.4,29.9l2.8-7.7l2.8,7.7C154,29.9,148.4,29.9,148.4,29.9z"></path>
+                    <path fill="#fff" d="M60.3,32.6c0.4,0.6,1,1.2,1.8,1.2s1.4-0.5,1.8-1.2l5.3-8V39h4.4V17.4h-4.5l-6.9,10.4l-6.9-10.4h-3c-1,0-1.7,0.7-1.7,1.7V39h4.3V24.7L60.3,32.6z"></path>
+                    <path fill="#fff" d="M10.6,37.6c2.1,1.6,5,2.2,7.6,2.2s4.6-0.6,6.1-1.8s2.3-2.8,2.4-4.9c0.1-1.7-0.4-3.3-1.9-4.6c-1-0.8-2.4-1.4-4.3-2.1c-0.8-0.3-2.7-0.9-3.3-1.2c-0.5-0.3-1.4-1-1.4-2c0-1.4,1.3-2.4,3.5-2.4c2.1,0,4.1,0.6,5.7,1.8l0.6-1.5c0.3-0.9,0.5-1.7,0.3-2.3c-0.4-0.8-1.9-1.3-3.1-1.6c-1.2-0.3-2.2-0.4-3.6-0.4c-1.6,0-3,0.3-4.2,0.8s-2.1,1.3-2.8,2.2c-0.6,1-1,2.1-1,3.3c0,1.7,0.5,3.1,1.5,4.2c1,1,2.5,1.7,5.1,2.7c1.3,0.5,2.8,1,3.3,1.5c0.6,0.4,0.9,1,0.9,1.7c0,1.6-1.5,2.6-4,2.6s-4.6-1-6-2.2L10.6,37.6z"></path>
+                    <path fill="#fff" d="M186,37.6c2.1,1.6,5,2.2,7.6,2.2s4.6-0.6,6.1-1.8s2.3-2.8,2.4-4.9c0.1-1.7-0.4-3.3-1.9-4.6c-1-0.8-2.4-1.4-4.3-2.1c-0.8-0.3-2.7-0.9-3.3-1.2c-0.5-0.3-1.4-1-1.4-2c0-1.4,1.3-2.4,3.5-2.4c2.1,0,4.1,0.6,5.7,1.8l0.6-1.5c0.3-0.9,0.5-1.7,0.3-2.3c-0.4-0.8-1.9-1.3-3.1-1.6c-1.2-0.3-2.2-0.4-3.6-0.4c-1.6,0-3,0.3-4.2,0.8s-2.1,1.3-2.8,2.2c-0.6,1-1,2.1-1,3.3c0,1.7,0.5,3.1,1.5,4.2c1,1,2.5,1.7,5.1,2.7c1.3,0.5,2.8,1,3.3,1.5c0.6,0.4,0.9,1,0.9,1.7c0,1.6-1.6,2.6-4,2.6c-2.5,0-4.6-1-6-2.2L186,37.6z"></path>
+                </svg>
+            </div>
+        </nav>
+        <div style="background-color: #f4f7f8" uk-grid>
+            <div class="uk-width-2-3" id="app" uk-height-viewport="offset-top: true">
+                <div v-if="eventsError || messagesError || shiftsError" class="uk-alert-danger" uk-alert>
+                    <div v-if="eventsError" class="uk-grid-small" uk-grid>
+                        <div><span uk-icon="icon: warning"></span></div>
+                        <div><p>{{ eventsError }}</p></div>
+                    </div>
+                    <div v-if="messagesError" class="uk-grid-small" uk-grid>
+                        <div><span uk-icon="icon: warning"></span></div>
+                        <div><p>{{ messagesError }}</p></div>
+                    </div>
+                    <div v-if="shiftsError" class="uk-grid-small" uk-grid>
+                        <div><span uk-icon="icon: warning"></span></div>
+                        <div><p>{{ shiftsError }}</p></div>
+                    </div>
+                </div>
+                <div class="uk-child-width-1-3" style="padding-left: 15px; padding-top: 20px" uk-grid="masonry: true">
+                    <template v-for="message in messages" :key="message.id">
+                        <div>
+                            <div class="uk-card uk-card-primary uk-card-body">
+                                <div class="uk-card-badge uk-label">Message</div>
+                                <div class="uk-margin" v-html="message.contents"></div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-for="event in events" :key="event.id">
+                        <div>
+                            <div class="uk-card uk-card-secondary uk-card-body">
+                                <div class="uk-card-badge uk-label">Event</div>
+                                <p class="uk-text-meta uk-margin-remove-bottom">{{ formatDate(event.date) }}</p>
+                                <h3 class="uk-card-title uk-margin-remove-top">{{ event.name }}</h3>
+                            </div>
+                        </div>
+                    </template>
+                    <div v-if="!shiftsLoading">
+                        <div class="uk-card uk-card-default uk-card-body">
+                            <div class="uk-card-badge uk-label">Shifts</div>
+                            <p class="uk-text-meta">{{ formatDate() }}</p>
+                            <template v-for="(shift, index) in shifts" :key="shift.id">
+                                <h4 class="uk-margin-remove" v-if="index == 0 || shift.start_datetime != shifts[index -1].start_datetime || shift.duration != shifts[index -1].duration">
+                                    {{ formatTime(shift.start_datetime) }} to {{ formatTime(endTime(shift.start_datetime, shift.duration)) }}
+                                </h4>
+                                <div>
+                                    <em>({{ shift.rota }})</em>
+                                    <template v-for="(volunteer, index) in shift.volunteers" :key="volunteer.id">
+                                        <template v-if="index > 0">,</template>
+                                        {{ volunteer.name }}
+                                    </template>
+                                </div>
+                            </template>
+                            <p v-if="!shifts.length">There are no shifts scheduled for today.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1-3">
+                <iframe class="uk-width-1-1" id="status" scrolling="no" src="/intranet/status/" uk-height-viewport="offset-top: true"></iframe>
+            </div>
+        </div>
+        <script>
+            const refreshIntervalInMinutes = 1;
+
+            const app = Vue.createApp({
+              data() {
+                return {
+                  eventsError: null,
+                  events: {},
+                  messagesError: null,
+                  messages: {},
+                  shiftsLoading: true,
+                  shiftsError: null,
+                  shifts: {}
+                }
+              },
+              created() {
+                this.fetchData();
+                setInterval(this.fetchData, refreshIntervalInMinutes * 1000 * 60);
+              },
+              methods: {
+                fetchData() {
+                  this.fetchEvents();
+                  this.fetchMessages();
+                  this.fetchShifts();
+                  document.getElementById('status').src = '/intranet/status/';
+                },
+                async fetchEvents() {
+                  try {
+                    const response = await fetch('/events.json');
+                    if (!response.ok)
+                      throw new Error(response.statusText);
+                    const json = await response.json();
+                    this.events = json['events']
+                    this.eventsError = null;
+                  } catch (err) {
+                    console.log(err);
+                    this.eventsError = "Unable to access events data feed.";
+                  }
+                },
+                async fetchMessages() {
+                  try {
+                    const response = await fetch('/wiki/branchcommsscreens/all_pages.json');
+                    if (!response.ok)
+                      throw new Error(response.statusText);
+                    const json = await response.json();
+                    this.messages = json
+                    this.messagesError = null;
+                  } catch (err) {
+                    console.log(err);
+                    this.messagesError = "Unable to access messages data feed.";
+                  }
+                },
+                async fetchShifts() {
+                  try {
+                    const response = await fetch('/stats/export_rotas.json');
+                    if (!response.ok)
+                      throw new Error(response.statusText);
+                    const json = await response.json();
+                    this.shifts = json['shifts']
+                    this.shiftsError = null;
+                    this.shiftsLoading = false;
+                  } catch (err) {
+                    console.log(err);
+                    this.shiftsError = "Unable to access shifts data feed.";
+                  }
+                },
+                formatDate(datetime = new Date()) {
+                  return moment(datetime).format('dddd[, ]MMMM Do YYYY')
+                },
+                formatTime(datetime) {
+                  return moment(datetime).utc().format('HH:mm')
+                },
+                endTime(start_datetime, duration) {
+                  return moment(start_datetime).add(duration, 's')
+                }
+              }
+            })
+
+            app.mount('#app')
+        </script>
+    </body>
+</html>
