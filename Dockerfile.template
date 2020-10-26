@@ -11,7 +11,7 @@ RUN set -x \
 COPY docker-entrypoint.sh /
 COPY 20-envsubst-on-templates.sh /docker-entrypoint.d
 COPY default.conf.template /etc/nginx/templates
-COPY html /var/www
+COPY html /var/www/
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 80
