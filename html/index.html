@@ -10,6 +10,7 @@
         <script src="js/uikit.min.js"></script>
         <script src="js/uikit-icons.min.js"></script>
         <script src="js/vue.global.prod.js"></script>
+        <style>html { font-size: 20px }</style>
     </head>
     <body>
         <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
@@ -31,7 +32,7 @@
             </div>
         </nav>
         <div style="background-color: #f4f7f8" uk-grid>
-            <div class="uk-width-2-3" id="app" uk-height-viewport="offset-top: true">
+            <div class="uk-width-3-4" id="app" style="height: calc(100vh - 80px)">
                 <div v-if="eventsError || messagesError || shiftsError" class="uk-alert-danger" uk-alert>
                     <div v-if="eventsError" class="uk-grid-small" uk-grid>
                         <div><span uk-icon="icon: warning"></span></div>
@@ -46,21 +47,21 @@
                         <div><p>{{ shiftsError }}</p></div>
                     </div>
                 </div>
-                <div class="uk-child-width-1-3" style="padding-left: 15px; padding-top: 20px" uk-grid="masonry: true">
-                    <template v-for="message in messages" :key="message.id">
-                        <div>
+                <div class="uk-child-width-1-4" style="padding-left: 15px; padding-top: 20px" uk-grid="masonry: true">
+                    <template v-for="(event, index) in events" :key="event.id">
+                        <div v-if="index < 12">
                             <div class="uk-card uk-card-primary uk-card-body">
-                                <div class="uk-card-badge uk-label">Message</div>
-                                <div class="uk-margin" v-html="message.contents"></div>
-                            </div>
-                        </div>
-                    </template>
-                    <template v-for="event in events" :key="event.id">
-                        <div>
-                            <div class="uk-card uk-card-secondary uk-card-body">
                                 <div class="uk-card-badge uk-label">Event</div>
                                 <p class="uk-text-meta uk-margin-remove-bottom">{{ formatDate(event.date) }}</p>
                                 <h3 class="uk-card-title uk-margin-remove-top">{{ event.name }}</h3>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-for="message in messages" :key="message.id">
+                        <div>
+                            <div class="uk-card uk-card-secondary uk-card-body">
+                                <div class="uk-card-badge uk-label">Message</div>
+                                <div class="uk-margin" v-html="message.contents"></div>
                             </div>
                         </div>
                     </template>
@@ -85,8 +86,8 @@
                     </div>
                 </div>
             </div>
-            <div class="uk-width-1-3">
-                <iframe class="uk-width-1-1" id="status" scrolling="no" src="/intranet/status/" uk-height-viewport="offset-top: true"></iframe>
+            <div class="uk-width-1-4" style="height: calc(100vh - 80px); padding-right: 30px; overflow: hidden">
+                <iframe id="status" class="uk-width-1-1" scrolling="no" src="/intranet/status/" style="height: calc(100vh - 80px)"></iframe>
             </div>
         </div>
         <script>

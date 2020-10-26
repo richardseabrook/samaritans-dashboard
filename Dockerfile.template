@@ -1,0 +1,20 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.12-run
+
+RUN set -x \
+ && apk add --no-cache gettext nginx \
+ && ln -sf /dev/stdout /var/log/nginx/access.log \
+ && ln -sf /dev/stderr /var/log/nginx/error.log \
+ && mkdir /docker-entrypoint.d \
+ && mkdir -p /etc/nginx/templates
+
+COPY docker-entrypoint.sh /
+COPY 20-envsubst-on-templates.sh /docker-entrypoint.d
+COPY default.conf.template /etc/nginx/templates
+COPY html /var/www
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+EXPOSE 80
+
+STOPSIGNAL SIGTERM
+
+CMD ["nginx", "-g", "daemon off;"]
