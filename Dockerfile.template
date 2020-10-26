@@ -5,7 +5,8 @@ RUN set -x \
  && ln -sf /dev/stdout /var/log/nginx/access.log \
  && ln -sf /dev/stderr /var/log/nginx/error.log \
  && mkdir /docker-entrypoint.d \
- && mkdir -p /etc/nginx/templates
+ && mkdir -p /etc/nginx/templates \
+ && mkdir -p /run/nginx
 
 COPY docker-entrypoint.sh /
 COPY 20-envsubst-on-templates.sh /docker-entrypoint.d
