@@ -11,7 +11,7 @@
         <script src="js/uikit-icons.min.js"></script>
         <script src="js/vue.global.prod.js"></script>
         <style>
-          html { font-family: "Varah",Sans-serif; font-size: 26px }
+          html { font-family: "Varah",Sans-serif; font-size: 36px }
           .uk-h1, .uk-h2, .uk-h3, .uk-h4, .uk-h5, .uk-h6, .uk-heading-2xlarge, .uk-heading-large, .uk-heading-medium, .uk-heading-small, .uk-heading-xlarge, h1, h2, h3, h4, h5, h6 { font-family: "Varah",Sans-serif }
           .connectors::before { border-radius: 0 3.5px 3.5px 0; width: 20px; height: 7px; top: 38px; left: 0 }
           .connectors::after { border-radius: 0 0 3.5px 3.5px; width: 7px; height: 20px; top: 0; left: 38px }
@@ -87,7 +87,7 @@
             </div>
             <div class="uk-width-1-4" style="height: calc(100vh - 100px); padding-right: 15px; overflow: hidden">
                 <!-- 0.5 = 200 / 0.8 = 125% / 1.25 = 80% / 1.6 = 62.5% / 2 = 50% -->
-                <iframe id="status" class="uk-width-1-1" scrolling="no" src="/intranet/status/" style="height: calc(100vh - 100px); transform: scale(1.25); transform-origin: 0 0; height: 80%; width: 80%"></iframe>
+                <iframe id="status" scrolling="no" src="/intranet/status/" style="transform: scale(1.25); transform-origin: 0 0; height: 80%; width: 80%; max-width: 80%"></iframe>
             </div>
         </div>
         <script>
