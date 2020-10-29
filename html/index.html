@@ -4,35 +4,33 @@
         <title>Samaritans Dashboard</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="data:,">
         <link rel="stylesheet" href="css/uikit.min.css" />
+        <link rel="stylesheet" href="css/fonts.css" />
         <script src="js/moment.min.js"></script>
         <script src="js/uikit.min.js"></script>
         <script src="js/uikit-icons.min.js"></script>
         <script src="js/vue.global.prod.js"></script>
-        <style>html { font-size: 20px }</style>
+        <style>
+          html { font-family: "Varah",Sans-serif; font-size: 26px }
+          .uk-h1, .uk-h2, .uk-h3, .uk-h4, .uk-h5, .uk-h6, .uk-heading-2xlarge, .uk-heading-large, .uk-heading-medium, .uk-heading-small, .uk-heading-xlarge, h1, h2, h3, h4, h5, h6 { font-family: "Varah",Sans-serif }
+          .connectors::before { border-radius: 0 3.5px 3.5px 0; width: 20px; height: 7px; top: 38px; left: 0 }
+          .connectors::after { border-radius: 0 0 3.5px 3.5px; width: 7px; height: 20px; top: 0; left: 38px }
+          .connectors::before, .connectors::after { content: ''; position: absolute; background: #f4f7f8 }
+          .embed h1, .embed h2, .embed h3, .embed h4, .embed h5, .embed h6 { font-size: 1.5rem; line-height: 1.4 }
+        </style>
     </head>
     <body>
-        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+        <nav class="uk-navbar-container uk-navbar-transparent" style="height: 100px" uk-navbar>
             <div class="uk-navbar-left">
-                <svg id="logo" height="55px" width="206px" focusable="false" class="uk-navbar-item uk-logo" viewBox="0 0 212.7 56.7">
-                    <title>Samaritans</title>
-                    <path fill="#8BBE29" d="M20.4,0v8.8c0,1-0.8,1.7-1.7,1.7c-1,0-1.7-0.8-1.7-1.7V0H0v56.7h192.3v-8.8c0-1,0.8-1.7,1.7-1.7c1,0,1.7,0.8,1.7,1.7v8.8h17V0H20.4z"></path>
-                    <path fill="#fff" d="M111.4,30.1c1.6-0.5,2.4-1.5,3-2.5s0.9-2.1,0.9-3.4c0-2.1-0.7-3.8-2.1-5s-3.4-1.8-5.8-1.8h-6.3c-1,0-1.7,0.7-1.7,1.7V39h4.6v-7.7h2.5c0.2,0,0.5,0,0.8,0L112,39h5.1L111.4,30.1z M110.7,24.3c0,2.2-1.4,3.2-4.2,3.2h-2.6V21h2.6C109.3,21.1,110.7,22.1,110.7,24.3"></path>
-                    <path fill="#fff" d="M120.9,17.4c-1,0-1.7,0.7-1.7,1.7V39h4.6V17.4H120.9z"></path>
-                    <path fill="#fff" d="M168.5,17.4H166c-1,0-1.7,0.7-1.7,1.7V39h4.4V24.8L179.6,39h4V17.4h-4.4v14L168.5,17.4z"></path>
-                    <path fill="#fff" d="M143.9,17.4h-16.2c-1,0-1.7,0.7-1.7,1.7v2.1h6.6V39h4.6V21.2h6.7L143.9,17.4L143.9,17.4z"></path>
-                    <path fill="#fff" d="M44.1,39H49l-8.5-21.5v-0.1h-4.7l-8.5,21.4L27.1,39h4.6l1.9-5.3h8.5L44.1,39z M35.1,29.9l2.8-7.7l2.8,7.7C40.7,29.9,35.1,29.9,35.1,29.9z"></path>
-                    <path fill="#fff" d="M92.4,39h4.9l-8.5-21.5v-0.1H84L75.4,39H80l1.9-5.3h8.5L92.4,39z M83.4,29.9l2.8-7.7l2.8,7.7C89,29.9,83.4,29.9,83.4,29.9z"></path>
-                    <path fill="#fff" d="M157.4,39h4.9l-8.5-21.5v-0.1H149l-8.5,21.4l-0.1,0.2h4.6l1.9-5.3h8.5L157.4,39z M148.4,29.9l2.8-7.7l2.8,7.7C154,29.9,148.4,29.9,148.4,29.9z"></path>
-                    <path fill="#fff" d="M60.3,32.6c0.4,0.6,1,1.2,1.8,1.2s1.4-0.5,1.8-1.2l5.3-8V39h4.4V17.4h-4.5l-6.9,10.4l-6.9-10.4h-3c-1,0-1.7,0.7-1.7,1.7V39h4.3V24.7L60.3,32.6z"></path>
-                    <path fill="#fff" d="M10.6,37.6c2.1,1.6,5,2.2,7.6,2.2s4.6-0.6,6.1-1.8s2.3-2.8,2.4-4.9c0.1-1.7-0.4-3.3-1.9-4.6c-1-0.8-2.4-1.4-4.3-2.1c-0.8-0.3-2.7-0.9-3.3-1.2c-0.5-0.3-1.4-1-1.4-2c0-1.4,1.3-2.4,3.5-2.4c2.1,0,4.1,0.6,5.7,1.8l0.6-1.5c0.3-0.9,0.5-1.7,0.3-2.3c-0.4-0.8-1.9-1.3-3.1-1.6c-1.2-0.3-2.2-0.4-3.6-0.4c-1.6,0-3,0.3-4.2,0.8s-2.1,1.3-2.8,2.2c-0.6,1-1,2.1-1,3.3c0,1.7,0.5,3.1,1.5,4.2c1,1,2.5,1.7,5.1,2.7c1.3,0.5,2.8,1,3.3,1.5c0.6,0.4,0.9,1,0.9,1.7c0,1.6-1.5,2.6-4,2.6s-4.6-1-6-2.2L10.6,37.6z"></path>
-                    <path fill="#fff" d="M186,37.6c2.1,1.6,5,2.2,7.6,2.2s4.6-0.6,6.1-1.8s2.3-2.8,2.4-4.9c0.1-1.7-0.4-3.3-1.9-4.6c-1-0.8-2.4-1.4-4.3-2.1c-0.8-0.3-2.7-0.9-3.3-1.2c-0.5-0.3-1.4-1-1.4-2c0-1.4,1.3-2.4,3.5-2.4c2.1,0,4.1,0.6,5.7,1.8l0.6-1.5c0.3-0.9,0.5-1.7,0.3-2.3c-0.4-0.8-1.9-1.3-3.1-1.6c-1.2-0.3-2.2-0.4-3.6-0.4c-1.6,0-3,0.3-4.2,0.8s-2.1,1.3-2.8,2.2c-0.6,1-1,2.1-1,3.3c0,1.7,0.5,3.1,1.5,4.2c1,1,2.5,1.7,5.1,2.7c1.3,0.5,2.8,1,3.3,1.5c0.6,0.4,0.9,1,0.9,1.7c0,1.6-1.6,2.6-4,2.6c-2.5,0-4.6-1-6-2.2L186,37.6z"></path>
-                </svg>
+                <img src="img/logo.png" class="uk-navbar-item uk-logo">
+            </div>
+            <div class="uk-navbar-right uk-navbar-item">
+              <h1 class="uk-h3 uk-margin-remove-bottom" style="color: #045">Welcome to <span class="uk-text-bold">Sevenoaks</span></h1>
+              <img src="img/arrows.png">
             </div>
         </nav>
-        <div style="background-color: #f4f7f8" uk-grid>
-            <div class="uk-width-3-4" id="app" style="height: calc(100vh - 80px)">
+        <div style="background: #f4f7f8" uk-grid>
+            <div class="uk-width-3-4" id="app" style="height: calc(100vh - 100px)">
                 <div v-if="eventsError || messagesError || shiftsError" class="uk-alert-danger" uk-alert>
                     <div v-if="eventsError" class="uk-grid-small" uk-grid>
                         <div><span uk-icon="icon: warning"></span></div>
@@ -47,32 +45,33 @@
                         <div><p>{{ shiftsError }}</p></div>
                     </div>
                 </div>
-                <div class="uk-child-width-1-4" style="padding-left: 15px; padding-top: 20px" uk-grid="masonry: true">
+                <div class="uk-child-width-1-4" style="padding-left: 15px; padding-top: 25px" uk-grid="masonry: true">
                     <template v-for="(event, index) in events" :key="event.id">
                         <div v-if="index < 12">
-                            <div class="uk-card uk-card-primary uk-card-body">
-                                <div class="uk-card-badge uk-label">Event</div>
-                                <p class="uk-text-meta uk-margin-remove-bottom">{{ formatDate(event.date) }}</p>
-                                <h3 class="uk-card-title uk-margin-remove-top">{{ event.name }}</h3>
+                            <div class="uk-card uk-card-body uk-light" style="background: #009bc8">
+                                <span class="connectors"></span>
+                                <p class="uk-text-meta uk-margin-remove">{{ formatDate(event.date) }}</p>
+                                <h1 class="uk-card-title uk-margin-remove-top">{{ event.name }}</h1>
                             </div>
                         </div>
                     </template>
                     <template v-for="message in messages" :key="message.id">
                         <div>
-                            <div class="uk-card uk-card-secondary uk-card-body">
-                                <div class="uk-card-badge uk-label">Message</div>
-                                <div class="uk-margin" v-html="message.contents"></div>
+                            <div class="uk-card uk-card-body uk-light" style="background: #045">
+                                <span class="connectors"></span>
+                                <div class="embed" v-html="message.contents"></div>
                             </div>
                         </div>
                     </template>
                     <div v-if="!shiftsLoading">
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <div class="uk-card-badge uk-label">Shifts</div>
-                            <p class="uk-text-meta">{{ formatDate() }}</p>
+                        <div class="uk-card uk-card-body uk-light" style="background: #72619f">
+                            <span class="connectors"></span>
+                            <p class="uk-text-meta uk-margin-remove">{{ formatDate() }}</p>
+                            <h1 class="uk-card-title uk-margin-remove-top">Today's Shifts</h1>
                             <template v-for="(shift, index) in shifts" :key="shift.id">
-                                <h4 class="uk-margin-remove" v-if="index == 0 || shift.start_datetime != shifts[index -1].start_datetime || shift.duration != shifts[index -1].duration">
+                                <h2 class="uk-h3 uk-margin-remove" v-if="index == 0 || shift.start_datetime != shifts[index -1].start_datetime || shift.duration != shifts[index -1].duration">
                                     {{ formatTime(shift.start_datetime) }} to {{ formatTime(endTime(shift.start_datetime, shift.duration)) }}
-                                </h4>
+                                </h2>
                                 <div>
                                     <em>({{ shift.rota }})</em>
                                     <template v-for="(volunteer, index) in shift.volunteers" :key="volunteer.id">
@@ -86,13 +85,13 @@
                     </div>
                 </div>
             </div>
-            <div class="uk-width-1-4" style="height: calc(100vh - 80px); padding-right: 30px; overflow: hidden">
-                <iframe id="status" class="uk-width-1-1" scrolling="no" src="/intranet/status/" style="height: calc(100vh - 80px)"></iframe>
+            <div class="uk-width-1-4" style="height: calc(100vh - 100px); padding-right: 15px; overflow: hidden">
+                <!-- 0.5 = 200 / 0.8 = 125% / 1.25 = 80% / 1.6 = 62.5% / 2 = 50% -->
+                <iframe id="status" class="uk-width-1-1" scrolling="no" src="/intranet/status/" style="height: calc(100vh - 100px); transform: scale(1.25); transform-origin: 0 0; height: 80%; width: 80%"></iframe>
             </div>
         </div>
         <script>
             const refreshIntervalInMinutes = 1;
-
             const app = Vue.createApp({
               data() {
                 return {
@@ -122,7 +121,9 @@
                     if (!response.ok)
                       throw new Error(response.statusText);
                     const json = await response.json();
-                    this.events = json['events']
+                    // only show events in the next 7 days
+                    // this.events = json['events']
+                    this.events = json['events'].filter(event => moment(event.date).isBefore(moment().add(7, 'd')))
                     this.eventsError = null;
                   } catch (err) {
                     console.log(err);

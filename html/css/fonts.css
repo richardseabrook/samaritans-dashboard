@@ -1,0 +1,25 @@
+
+@font-face {
+   font-family: Varah;
+   font-style: normal;
+   font-weight: normal;
+   src: url('fonts/varah-normal-normal.woff') format('woff');
+}
+@font-face {
+   font-family: Varah;
+   font-style: normal;
+   font-weight: bold;
+   src: url('fonts/varah-normal-bold.woff') format('woff');
+}
+@font-face {
+   font-family: Varah;
+   font-style: italic;
+   font-weight: normal;
+   src: url('fonts/varah-italic-normal.woff') format('woff');
+}
+@font-face {
+   font-family: Varah;
+   font-style: italic;
+   font-weight: bold;
+   src: url('fonts/varah-italic-bold.woff') format('woff');
+}
