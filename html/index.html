@@ -92,8 +92,12 @@
         </div>
         <script>
             $('#status').on("load", function() {
-              $(this).contents().find( ".bubble-copy__item p" ).css( "font-size", "24px" );
-              $(this).contents().find( "ul.status-bubbles" ).css( "margin-top", "100%" );
+              $(this).contents().find( ".page-header__info" ).css( "font-size", "32px" );
+              $(this).contents().find( ".page-header__info h2" ).hide();
+              $(this).contents().find( ".bubble-copy__item p" ).css( "font-size", "32px" );
+              $(this).contents().find( "ul.status-bubbles" ).css( "margin-top", "60%" );
+              $(this).contents().find( "span.waiting__label" ).html( "wait" );
+              $(this).contents().find( "span.queue__label" ).html( "waiting" );
             });
 
             const refreshIntervalInMinutes = 2;
