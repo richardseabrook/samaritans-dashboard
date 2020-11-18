@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Samaritans Dashboard</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/uikit.min.css" />
+        <link rel="stylesheet" href="css/fonts.css" />
+        <script src="js/jquery-3.5.1.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/uikit.min.js"></script>
+        <script src="js/uikit-icons.min.js"></script>
+        <script src="js/vue.global.prod.js"></script>
+        <style>
+            html { font-family: "Varah",Sans-serif; font-size: 16px }
+            .uk-h1, .uk-h2, .uk-h3, .uk-h4, .uk-h5, .uk-h6, .uk-heading-2xlarge, .uk-heading-large, .uk-heading-medium, .uk-heading-small, .uk-heading-xlarge, h1, h2, h3, h4, h5, h6 { font-family: "Varah",Sans-serif }
+            .connectors::before { border-radius: 0 3.5px 3.5px 0; width: 20px; height: 7px; top: 38px; left: 0 }
+            .connectors::after { border-radius: 0 0 3.5px 3.5px; width: 7px; height: 20px; top: 0; left: 38px }
+            .connectors::before, .connectors::after { content: ''; position: absolute; background: #f4f7f8 }
+            .embed h1, .embed h2, .embed h3, .embed h4, .embed h5, .embed h6 { font-size: 1.5rem; line-height: 1.4 }
+.embed img { display: none }
+        </style>
+    </head>
+    <body>
+        <nav class="uk-navbar-container uk-navbar-transparent" style="height: 100px" uk-navbar>
+            <div class="uk-navbar-left">
+                <img src="img/logo.png" class="uk-navbar-item uk-logo">
+            </div>
+            <div class="uk-navbar-right uk-navbar-item">
+              <h1 class="uk-h3 uk-margin-remove-bottom" style="color: #045">Welcome to <span class="uk-text-bold">Sevenoaks</span></h1>
+              <img src="img/arrows.png">
+            </div>
+        </nav>
+        <div style="background: #f4f7f8" uk-grid>
+<div class="uk-width-5-6" id="app" uk-grid>
+            <div class="uk-width-2-3" style="height: calc(100vh - 100px)">
+                <div v-if="eventsError || messagesError || shiftsError" class="uk-alert-danger" uk-alert>
+                    <div v-if="eventsError" class="uk-grid-small" uk-grid>
+                        <div><span uk-icon="icon: warning"></span></div>
+                        <div><p>{{ eventsError }}</p></div>
+                    </div>
+                    <div v-if="messagesError" class="uk-grid-small" uk-grid>
+                        <div><span uk-icon="icon: warning"></span></div>
+                        <div><p>{{ messagesError }}</p></div>
+                    </div>
+                    <div v-if="shiftsError" class="uk-grid-small" uk-grid>
+                        <div><span uk-icon="icon: warning"></span></div>
+                        <div><p>{{ shiftsError }}</p></div>
+                    </div>
+                </div>
+                <div class="uk-child-width-1-2" style="padding-left: 15px; padding-top: 20px" uk-grid="masonry: true">
+                    <template v-for="message in messages" :key="message.id">
+                        <div>
+                            <div class="uk-card uk-card-body uk-light" style="background: #045">
+                                <span class="connectors"></span>
+                                <div class="embed" v-html="message.contents"></div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="uk-width-1-3" style="height: calc(100vh - 100px)">
+                <div class="uk-child-width-1-1" style="padding-top: 20px" uk-grid="masonry: true">
+                    <div v-if="!shiftsLoading">
+                        <div class="uk-card uk-card-body uk-light" style="background: #72619f">
+                            <span class="connectors"></span>
+                            <p class="uk-text-meta uk-margin-remove">{{ formatDate() }}</p>
+                            <h1 class="uk-card-title uk-margin-remove-top">Today's Shifts</h1>
+                            <template v-for="(shift, index) in shifts" :key="shift.id">
+                                <h2 class="uk-h3 uk-margin-remove" v-if="index == 0 || shift.start_datetime != shifts[index -1].start_datetime || shift.duration != shifts[index -1].duration">
+                                    {{ formatTime(shift.start_datetime) }} to {{ formatTime(endTime(shift.start_datetime, shift.duration)) }}
+                                </h2>
+                                <div>
+                                    <em>({{ shift.rota }})</em>
+                                    <template v-for="(volunteer, index) in shift.volunteers" :key="volunteer.id">
+                                        <template v-if="index > 0">,</template>
+                                        {{ volunteer.name }}
+                                    </template>
+                                </div>
+                            </template>
+                            <p v-if="!shifts.length">There are no shifts scheduled for today.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+            <div class="uk-width-1-6" style="height: calc(100vh - 100px); padding-right: 15px; overflow: hidden">
+                <iframe class="uk-width-1-1" id="status" scrolling="no" src="/intranet/status/" style="height: calc(100vh - 100px)"></iframe>
+            </div>
+        </div>
+        <script>
+            $('#status').on("load", function() {
+              $(this).contents().find( ".page-header" ).hide();
+//              $(this).contents().find( ".bubble-copy__item p" ).css( "font-size", "24px" );
+              $(this).contents().find( "ul.status-bubbles" ).css( "margin-top", "20px" );
+              $(this).contents().find( "span.waiting__label" ).html( "wait" );
+              $(this).contents().find( "span.queue__label" ).html( "waiting" );
+            });
+
+            const refreshIntervalInMinutes = 2;
+            const app = Vue.createApp({
+              data() {
+                return {
+                  eventsError: null,
+                  events: {},
+                  messagesError: null,
+                  messages: {},
+                  shiftsLoading: true,
+                  shiftsError: null,
+                  shifts: {}
+                }
+              },
+              created() {
+                this.fetchData();
+                setInterval(this.fetchData, refreshIntervalInMinutes * 1000 * 60);
+              },
+              methods: {
+                fetchData() {
+                  this.fetchEvents();
+                  this.fetchMessages();
+                  this.fetchShifts();
+                  document.getElementById('status').src = '/intranet/status/';
+                },
+                async fetchEvents() {
+                  try {
+                    const response = await fetch('/events.json');
+                    if (!response.ok)
+                      throw new Error(response.statusText);
+                    const json = await response.json();
+                    // only show events in the next 7 days
+                    // this.events = json['events']
+                    this.events = json['events'].filter(event => moment(event.date).isBefore(moment().add(7, 'd')))
+                    this.eventsError = null;
+                  } catch (err) {
+                    console.log(err);
+                    this.eventsError = "Unable to access events data feed.";
+                  }
+                },
+                async fetchMessages() {
+                  try {
+                    const response = await fetch('/wiki/branchcommsscreens/all_pages.json');
+                    if (!response.ok)
+                      throw new Error(response.statusText);
+                    const json = await response.json();
+                    this.messages = json
+                    this.messagesError = null;
+                  } catch (err) {
+                    console.log(err);
+                    this.messagesError = "Unable to access messages data feed.";
+                  }
+                },
+                async fetchShifts() {
+                  try {
+                    const response = await fetch('/stats/export_rotas.json');
+                    if (!response.ok)
+                      throw new Error(response.statusText);
+                    const json = await response.json();
+                    this.shifts = json['shifts']
+                    this.shiftsError = null;
+                    this.shiftsLoading = false;
+                  } catch (err) {
+                    console.log(err);
+                    this.shiftsError = "Unable to access shifts data feed.";
+                  }
+                },
+                formatDate(datetime = new Date()) {
+                  return moment(datetime).format('dddd[, ]MMMM Do YYYY')
+                },
+                formatTime(datetime) {
+                  return moment(datetime).utc().format('HH:mm')
+                },
+                endTime(start_datetime, duration) {
+                  return moment(start_datetime).add(duration, 's')
+                }
+              }
+            })
+
+            app.mount('#app')
+        </script>
+    </body>
+</html>
