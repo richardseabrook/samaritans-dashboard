@@ -4,6 +4,8 @@ server {
 
 	root /var/www/html;
 
+	resolver 8.8.8.8 8.8.4.4 ipv6=off;
+
 	location / {
 		try_files $uri $uri/ =404;
 	}
