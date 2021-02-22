@@ -63,7 +63,7 @@ In our branch, we used:
 
 * Visit [balena-dash](https://github.com/balenalabs/balena-dash) and click the 'Deploy with balena' button.
 * Select to create a new application and name it 'balena-dash'.
-* Go to the Environment Variables tab and edit the variable called LAUNCH_URL. Set it to http://<IP>/ substituting the IP your nginx Pi is running on.
+* Go to the Environment Variables tab and edit the variable called LAUNCH_URL. Set it to http://YOUR.IP.ADDRESS.HERE/ substituting the IP your nginx Pi is running on.
 * Add a device leaving all settings at defaults, except selecting 'Wifi + Ethernet' and entering your wifi network details if required. Download the resulting disk image and burn it to your Micro SD card using [Etcher](https://www.balena.io/etcher/).
 * Burn the same image for any additional screens.
 * Connect the Pis to the screens and boot them up. You will probably notice the screen is oddly placed, we'll fix that next.
@@ -80,7 +80,7 @@ To change the breakpoint between the two screen modes change any reference to 38
 
 ## Testing
 
-To allow easy testing of the two resolution modes, you can use the files at http://<IP>/test_1080p.html and http://<IP>/test_4k.html.
+To allow easy testing of the two resolution modes, you can use the files at http://YOUR.IP.ADDRESS.HERE/test_1080p.html and http://YOUR.IP.ADDRESS.HERE/test_4k.html.
 
 ## Credits
 
