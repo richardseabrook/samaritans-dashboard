@@ -42,10 +42,10 @@ In our branch, we used:
 
 * Create a new Wiki in 3R called 'Branch Comms Screens' any pages you create in here will become on-screen messages. You may want to use 3R permissions to restrict the ability to change these and/or use the lock functionality.
 * Create a new role in 3R called 'Branch Comms Screens'.
-* Grant this role View on Events, View for Branch, View for Wiki and View for Stats and enable it as a Core role.
-* Create a volunteer called 'Branch Comms Screens' and add an API key for them.
+* Grant this role View on Events, under Directory Access grant View for all core roles, tick Directory Self-manage, View for Wiki and View for Stats and enable it as a Core role.
+* Create a volunteer called 'Branch Comms Screens' with only this role, log in as this new account and add an API key for them via their Directory page.
 * For each rota you want the screen to display, ensure Branch Comms Screens has View permissions over it.
-* For the most part, we ensure that no other role can view or manage the Branch Comms Screens role, so that it does not appear in the Directory. You can grant yourself temporary manage permission over it if you ever need to make changes.
+* For the most part, we ensure that no other role can view or manage the Branch Comms Screens role, so that it does not appear in the Directory or risk being deleted.
 
 ### balenaCloud
 
