@@ -4,8 +4,8 @@ A status dashboard for [Samaritans](https://www.samaritans.org/) branches utilis
 
 Predominantly designed for use on large screen TVs, there are two display modes which are selected automatically based on the screen size. It is strongly recommended to be utilised on 4K TVs for the additional screen real-estate:
 
-![1080p (1920x1080) Screen](https://raw.githubusercontent.com/richardseabrook/samaritans-dashboard/master/README_img/1080p.jpg "1080p")
 ![4k (3840x2160) Screen](https://raw.githubusercontent.com/richardseabrook/samaritans-dashboard/master/README_img/4k.jpg "4k")
+![1080p (1920x1080) Screen](https://raw.githubusercontent.com/richardseabrook/samaritans-dashboard/master/README_img/1080p.jpg "1080p")
 
 This was written for [Sevenoaks Samaritans](https://www.samaritans.org/sevenoaks/), but is now utilised in a number of branches.
 
