@@ -20,17 +20,25 @@ The nginx instance serves the webapp, as well as acting as a [CORS](https://en.w
 In our branch, we used:
 
 1 x 4k TV (donated)
+
 1 x 1080p Monitor (donated)
+
 3 x [Raspberry Pi 4 Model B - 2GB](https://thepihut.com/products/raspberry-pi-4-model-b?variant=20064052674622)
+
 3 x [FLIRC Raspberry Pi 4 Case](https://thepihut.com/products/flirc-raspberry-pi-4-case?variant=20649168404542)
+
 3 x ['NOOBS' Preinstalled Micro SD Card (Latest v3.4.0) - 16GB](https://thepihut.com/products/noobs-preinstalled-sd-card?variant=30582045905)
+
 3 x [Official UK Raspberry Pi 4 Power Supply (5.1V 3A) - White](https://thepihut.com/products/raspberry-pi-psu-uk?variant=20064004505662)
+
 2 x [Official Raspberry Pi 4 Micro-HDMI Cable - 1M / White](https://thepihut.com/products/micro-hdmi-to-standard-hdmi-a-cable?variant=31597424934974)
 
 * There is one more Raspberry Pi than the number of screens.
 * Use a good quality metal case, so that heat can be dissipated adequately.
 
 ## Deployment
+
+### Three Rings
 
 * Create a new Wiki in 3R called 'Branch Comms Screens' any pages you create in here will become on-screen messages. You may want to use 3R permissions to restrict the ability to change these and/or use the lock functionality.
 * Create a new role in 3R called 'Branch Comms Screens'.
@@ -39,13 +47,19 @@ In our branch, we used:
 * For each rota you want the screen to display, ensure Branch Comms Screens has View permissions over it.
 * For the most part, we ensure that no other role can view or manage the Branch Comms Screens role, so that it does not appear in the Directory. You can grant yourself temporary manage permission over it if you ever need to make changes.
 
+### balenaCloud
+
 * Sign up for a [balenaCloud](https://www.balena.io/) account, which is free for up to 10 devices.
+
+#### nginx
 
 * Create a new application called 'nginx', set the default device type to match your Raspberry Pi model and leave the application type as 'Starter'.
 * Go to the Environment Variables tab and add a variable called THREERINGS_APIKEY with the value of the API key created in 3R.
 * Go to Releases tab and add a release. Follow the instructions and upload the contents of this repo.
 * Add a device leaving all settings at defaults, except selecting 'Wifi + Ethernet' and entering your wifi network details if required. Download the resulting disk image and burn it to your Micro SD card using [Etcher](https://www.balena.io/etcher/).
 * Boot the Pi and note the IP address. You will probably want to set your branch's DHCP server to allocate a specific IP to this device with a static lease. You can find the device's MAC address once it is online in the Devices tab and then clicking on the device itself. This page also shows you any log messages and allows you to remotely reboot, etc.
+
+#### balena-dash
 
 * Visit [balena-dash](https://github.com/balenalabs/balena-dash) and click the 'Deploy with balena' button.
 * Select to create a new application and name it 'balena-dash'.
