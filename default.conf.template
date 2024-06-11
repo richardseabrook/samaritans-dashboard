@@ -20,6 +20,8 @@ server {
 		proxy_pass https://www.3r.org.uk/wiki/branchcommsscreens/all_pages.json;
 	}
 	location /intranet/status/ {
+		proxy_hide_header X-Frame-Options;
+		add_header X-Frame-Options "SAMEORIGIN";
 		proxy_pass https://dashboard.samaritans.org/intranet/status/;
 	}
 	location /static/ {
