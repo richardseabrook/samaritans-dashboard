@@ -7,7 +7,7 @@ ME=$(basename $0)
 auto_envsubst() {
   local template_dir="${NGINX_ENVSUBST_TEMPLATE_DIR:-/etc/nginx/templates}"
   local suffix="${NGINX_ENVSUBST_TEMPLATE_SUFFIX:-.template}"
-  local output_dir="${NGINX_ENVSUBST_OUTPUT_DIR:-/etc/nginx/conf.d}"
+  local output_dir="${NGINX_ENVSUBST_OUTPUT_DIR:-/etc/nginx/http.d}"
 
   local template defined_envs relative_path output_path subdir
   defined_envs=$(printf '${%s} ' $(env | cut -d= -f1))
