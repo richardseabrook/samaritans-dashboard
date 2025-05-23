@@ -1,5 +1,8 @@
 # samaritans-dashboard
 
+[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/richardseabrook/samaritans-dashboard)
+
+
 A status dashboard for [Samaritans](https://www.samaritans.org/) branches utilising [Three Rings](https://www.threerings.org.uk/). It allows authorised users to post messages for others (via the 3R wiki), shows today's shifts, events for the coming week and status of inbound communications channels. It can be easily customised with a basic understanding of HTML, CSS and Javascript.
 
 Predominantly designed for use on large screen TVs, there are two display modes which are selected automatically based on the screen size. It is strongly recommended to be utilised on 4K TVs for the additional screen real-estate:
