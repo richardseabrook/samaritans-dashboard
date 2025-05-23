@@ -2,6 +2,9 @@ server {
 	listen 80 default_server;
 
 	root /var/www/html;
+        ssi on;
+        set $ENV_SITE_NAME "Samaritans";
+        set $ENV_SITE_NAME "$SITE_NAME";
 
 	location / {
 		try_files $uri $uri/ =404;

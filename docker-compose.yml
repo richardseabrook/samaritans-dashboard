@@ -1,0 +1,20 @@
+version: '2'
+services:
+
+  app:
+    build: ./app
+    ports:
+      - '80'
+    restart: always
+
+  browser:
+    depends_on:
+      - app
+    environment:
+      KIOSK: 1
+      ENABLE_GPU: 1
+    image: bh.cr/balenalabs/browser-aarch64
+    ports:
+      - '5011'
+    privileged: true
+    restart: always
