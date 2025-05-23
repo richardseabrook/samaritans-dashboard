@@ -3,23 +3,19 @@ services:
 
   app:
     build: ./app
-    network_mode: 'host'
-#    ports:
-#      - '80'
+    ports:
+      - '80'
     restart: always
 
   browser:
     depends_on:
       - app
     environment:
-#      LAUNCH_URL: http://app/
+      LAUNCH_URL: http://app/
       KIOSK: 1
       ENABLE_GPU: 1
-      WINDOW_SIZE: 1920,1080
     image: bh.cr/balenalabs/browser-aarch64
-    network_mode: 'host'
-#    ports:
-#      - '5011'
-#      - '35173'
+    ports:
+      - '5011'
     privileged: true
     restart: always

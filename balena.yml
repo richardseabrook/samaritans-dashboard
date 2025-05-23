@@ -14,7 +14,7 @@ data:
   applicationEnvironmentVariables:
     - SITE_NAME: Sevenoaks
     - THREERINGS_APIKEY:
-#    - WINDOW_SIZE:
+    - WINDOW_SIZE: 1920,1080
   applicationConfigVariables:
     - BALENA_HOST_CONFIG_disable_overscan: 1
   defaultDeviceType: raspberrypi4-64
