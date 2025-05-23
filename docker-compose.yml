@@ -13,7 +13,7 @@ services:
     environment:
       LAUNCH_URL: http://app/
       KIOSK: 1
-      ENABLE_GPU: 1
+      ENABLE_GPU: 0
     image: bh.cr/balenalabs/browser-aarch64
     ports:
       - '5011'
