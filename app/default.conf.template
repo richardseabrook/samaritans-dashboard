@@ -2,10 +2,10 @@ server {
 	listen 80 default_server;
 
 	root /var/www/html;
-        ssi on;
-        set $ENV_SITE_NAME "$SITE_NAME";
 
 	location / {
+		ssi on;
+		set $ENV_SITE_NAME "$SITE_NAME";
 		try_files $uri $uri/ =404;
 	}
 	location = /events.json {
