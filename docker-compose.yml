@@ -11,10 +11,13 @@ services:
     depends_on:
       - app
     environment:
+      LAUNCH_URL: http://app/
       KIOSK: 1
       ENABLE_GPU: 1
+      WINDOW_SIZE: 1920,1080
     image: bh.cr/balenalabs/browser-aarch64
     ports:
       - '5011'
+      - '35173'
     privileged: true
     restart: always
