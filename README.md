@@ -69,7 +69,7 @@ Now let's set up each device:
 * All other details can be left at their default values.
 * Click **Flash** this should open balenaEtcher ready to go with your customised image. Select your SD card using **Select target** and then **Flash!**. If your SD card shows *Locked* then operate the physical locking slide on the card adaptor to allow writes.
 * Once this has finished, you can make further copies using the same file for each device now - or you can return to your fleet page later and add more.
-* Plug your SD card into your Pi, connect your network (optional), HDMI and power cables and boot it.
+* Plug your SD card into your Pi, connect your network (optional), HDMI (ensure you use HDMI0) and power cables and boot it.
 * You should see the logo boot screen on the device. This will stay for a few minutes while software is deployed to the unit. However you should see the new device appear almost immediately on your fleet dashboard with download progress and logs shown. If this doesn't happen, you may want to check the network connection.
 * The device may restart a few times while settings are applied, but once components have downloaded and are ready, the Samaritans Dashboard should load.
 
@@ -78,7 +78,7 @@ Now let's set up each device:
 
 ## Upgrading
 
-If you are an existing user, there are a few benefits to upgrade - better support for newer displays and devices, no need to edit the HTML to replace your branch name (now done via configuration variable) and no need to have one more Pi than displays. All components now run together on each device.
+If you are an existing user, there are a few benefits to upgrade - better support for newer displays and devices, no need to edit the HTML to replace your branch name (now done via configuration variable) and no need to have one more Pi than displays. All components now run together on each device. Deployment is now _much_ simplified.
 
 Due to the major changes involved, the recommended upgrade path is:
 
