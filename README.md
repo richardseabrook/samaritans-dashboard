@@ -11,9 +11,11 @@ This was written for [Sevenoaks Samaritans](https://www.samaritans.org/sevenoaks
 
 ## Usage
 
-This code was written to be utilised on the low-cost and low-energy [Raspberry Pi 4B](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/), via [balenaCloud](https://www.balena.io/) which allows easy remote management and is free for our use case. This repo contains configuration to run an nginx Docker container and a [Vue.js](https://vuejs.org/) webapp which handles the screen presentation itself. It also uses the [UIkit](https://getuikit.com/) CSS framework. It has also been tested on [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) and probably works on [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/), albeit untested.
+This code was written to be utilised on the low-cost and low-energy [Raspberry Pi 4B](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/), via [balenaCloud](https://www.balena.io/) which allows easy remote management and is free for our use case.
 
-The nginx instance serves the webapp, as well as acting as a [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) proxy to the SCO dashboard for queue statistics.
+This repo contains configuration to run a multi-container stack with Chromium web browser ("browser" container) and nginx web server serving a single page web app ([Vue.js](https://vuejs.org/)/[jQuery](https://jquery.com/)/[UIkit](https://getuikit.com/)) and authentication/[CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) proxy to 3R API and SCO dashboard ("app" container).
+
+The SCO dashboard provides realtime queue statistics for each contact method, while the 3R API is used for shift, event and message data. 3R wiki pages in the specified wiki are presented as messages on screen.
 
 ## Equipment
 
@@ -78,6 +80,10 @@ Now let's set up each device:
 
 > [!TIP]
 > Your screen resolution should be auto-detected, but if not, go to **Device Variables** for the specific device, **Add variable** set name to *WINDOW_SIZE* (in capitals) with a value of the desired resolution with a comma in between - eg. 1920,1080 or 3840,2160. Locate the correct value in your display documentation.
+
+You may also want to manually set your resolution if you see the low-resolution version (square queue statistic boxes, rather than circles and no event information) when you have a 4K resolution or higher display.
+
+If you see the logo boot screen for a very long period, check balenaCloud - especially that the device is shown in the fleet (if not, check network) and shows progress downloading images. Also check there are no warnings about incorrect voltage (incorrect power supply).
 
 ## Upgrading
 
