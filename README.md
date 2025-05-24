@@ -36,6 +36,9 @@ In our branch, we used:
 + ~~There is one more Raspberry Pi than the number of screens.~~ (Since v2.0.0 there is no need of an additional Pi to run as a server.)
 * Use a good quality metal case, so that heat can be dissipated adequately.
 
+> [!CAUTION]
+> Do not try to use old USB power supplies or low-quality SD cards! Under-rated power supplies may damage your device and result in unpredictable results. Watch out for *The device is undervolted!* at the top of each device page. Sticking to official power supplies, as above, will avoid this issue.
+
 ## Deployment
 
 ### Three Rings
