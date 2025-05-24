@@ -1,8 +1,5 @@
 # samaritans-dashboard
 
-[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/richardseabrook/samaritans-dashboard)
-
-
 A status dashboard for [Samaritans](https://www.samaritans.org/) branches utilising [Three Rings](https://www.threerings.org.uk/). It allows authorised users to post messages for others (via the 3R wiki), shows today's shifts, events for the coming week and status of inbound communications channels. It can be easily customised with a basic understanding of HTML, CSS and Javascript.
 
 Predominantly designed for use on large screen TVs, there are two display modes which are selected automatically based on the screen size. It is strongly recommended to be utilised on 4K TVs for the additional screen real-estate:
@@ -14,7 +11,7 @@ This was written for [Sevenoaks Samaritans](https://www.samaritans.org/sevenoaks
 
 ## Usage
 
-This code was written to be utilised on the low-cost and low-energy [Raspberry Pi 4B](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/), via [balenaCloud](https://www.balena.io/) which allows easy remote management and is free for our use case. This repo contains configuration to run an nginx Docker container and a [Vue.js](https://vuejs.org/) webapp which handles the screen presentation itself. It also uses the [UIkit](https://getuikit.com/) CSS framework.
+This code was written to be utilised on the low-cost and low-energy [Raspberry Pi 4B](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/), via [balenaCloud](https://www.balena.io/) which allows easy remote management and is free for our use case. This repo contains configuration to run an nginx Docker container and a [Vue.js](https://vuejs.org/) webapp which handles the screen presentation itself. It also uses the [UIkit](https://getuikit.com/) CSS framework. It has also been tested on [Raspberry Pi 3B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) and probably works on [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/), albeit untested.
 
 The nginx instance serves the webapp, as well as acting as a [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) proxy to the SCO dashboard for queue statistics.
 
@@ -26,17 +23,17 @@ In our branch, we used:
 
 1 x 1080p Monitor (donated)
 
-3 x [Raspberry Pi 4 Model B - 2GB](https://thepihut.com/products/raspberry-pi-4-model-b?variant=20064052674622)
+2 x [Raspberry Pi 4 Model B - 2GB](https://thepihut.com/products/raspberry-pi-4-model-b?variant=20064052674622)
 
-3 x [FLIRC Raspberry Pi 4 Case](https://thepihut.com/products/flirc-raspberry-pi-4-case?variant=20649168404542)
+2 x [FLIRC Raspberry Pi 4 Case](https://thepihut.com/products/flirc-raspberry-pi-4-case?variant=20649168404542)
 
-3 x ['NOOBS' Preinstalled Micro SD Card (Latest v3.4.0) - 16GB](https://thepihut.com/products/noobs-preinstalled-sd-card?variant=30582045905)
+2 x ['NOOBS' Preinstalled Micro SD Card (Latest v3.4.0) - 16GB](https://thepihut.com/products/noobs-preinstalled-sd-card?variant=30582045905)
 
-3 x [Official UK Raspberry Pi 4 Power Supply (5.1V 3A) - White](https://thepihut.com/products/raspberry-pi-psu-uk?variant=20064004505662)
+2 x [Official UK Raspberry Pi 4 Power Supply (5.1V 3A) - White](https://thepihut.com/products/raspberry-pi-psu-uk?variant=20064004505662)
 
 2 x [Official Raspberry Pi 4 Micro-HDMI Cable - 1M / White](https://thepihut.com/products/micro-hdmi-to-standard-hdmi-a-cable?variant=31597424934974)
 
-* There is one more Raspberry Pi than the number of screens.
++ ~~There is one more Raspberry Pi than the number of screens.~~ (Since v2.0.0 there is no need of an additional Pi to run as a server.)
 * Use a good quality metal case, so that heat can be dissipated adequately.
 
 ## Deployment
@@ -44,7 +41,7 @@ In our branch, we used:
 ### Three Rings
 
 * Create a new Wiki in 3R called 'Branch Comms Screens' any pages you create in here will become on-screen messages. You may want to use 3R permissions to restrict the ability to change these and/or use the lock functionality.
-* Create a new role in 3R called 'Branch Comms Screens'.
+* Create a new role in 3R called something similar to 'Branch Comms Screens'.
 * Grant this role View on Events, under Directory Access grant View for all core roles, tick Directory Self-manage, View for Wiki and View for Stats and enable it as a Core role.
 * Create a volunteer called 'Branch Comms Screens' with only this role, log in as this new account and add an API key for them via their Directory page.
 * For each rota you want the screen to display, ensure Branch Comms Screens has View permissions over it.
@@ -52,38 +49,56 @@ In our branch, we used:
 
 ### balenaCloud
 
+* Download and install [balenaEtcher](https://etcher.balena.io/) which we will use to write to SD cards.
 * Sign up for a [balenaCloud](https://www.balena.io/) account, which is free for up to 10 devices.
+* Click the following button:
 
-#### nginx
+[![balena deploy button](https://www.balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/richardseabrook/samaritans-dashboard)
 
-* Create a new application called 'nginx', set the default device type to match your Raspberry Pi model and leave the application type as 'Starter'.
-* Go to the Environment Variables tab and add a variable called THREERINGS_APIKEY with the value of the API key created in 3R.
-* Go to Releases tab and add a release. Follow the instructions and upload the contents of this repo.
-* Add a device leaving all settings at defaults, except selecting 'Wifi + Ethernet' and entering your wifi network details if required. Download the resulting disk image and burn it to your Micro SD card using [Etcher](https://www.balena.io/etcher/).
-* Boot the Pi and note the IP address. You will probably want to set your branch's DHCP server to allocate a specific IP to this device with a static lease. You can find the device's MAC address once it is online in the Devices tab and then clicking on the device itself. This page also shows you any log messages and allows you to remotely reboot, etc.
+* Ensure the default device type matches the type of Pi you are using for your project. You must run 64bit OS (the only option for Pi 4 onwards).
+* Click the **Advanced** toggle switch.
+* Update your *SITE_NAME* - eg. Sevenoaks. This is used for the 'Welcome to' dashboard header and needs to be relatively short.
+* Insert the *THREERINGS_APIKEY* you obtained above in the related value box.
+* Click **Create and deploy**.
 
-#### balena-dash
+Now let's set up each device:
 
-* Visit [balena-dash](https://github.com/balenalabs/balena-dash) and click the 'Deploy with balena' button.
-* Select to create a new application and name it 'balena-dash'.
-* Go to the Environment Variables tab and edit the variable called LAUNCH_URL. Set it to http://YOUR.IP.ADDRESS.HERE/ substituting the IP your nginx Pi is running on.
-* Add a device leaving all settings at defaults, except selecting 'Wifi + Ethernet' and entering your wifi network details if required. Download the resulting disk image and burn it to your Micro SD card using [Etcher](https://www.balena.io/etcher/).
-* Burn the same image for any additional screens.
-* Connect the Pis to the screens and boot them up. You will probably notice the screen is oddly placed, we'll fix that next.
-* Go to Devices tab and click into each device in turn, under Terminal select a target of 'kiosk' and start the terminal session.
-* At the prompt, run 'tvservice -s' and note the detected screen resolution - eg 3840x2160.
-* Go to Device Variables and edit the WINDOW_SIZE variable, setting it based on the value found above but exchanging the x for a comma - eg 3840,2160.
-* Reboot the device - you can do this from the device summary page.
+* Click **Add device**.
+* Ensure your device type matches that which you will be using. You must use 64bit OS where you have multiple options.
+* It is usually best to connect your device using a network cable, but if you want to use WiFi, select *Wifi + Ethernet* and enter your network details.
+* All other details can be left at their default values.
+* Click **Flash** this should open balenaEtcher ready to go with your customised image. Select your SD card using **Select target** and then **Flash!**. If your SD card shows *Locked* then operate the physical locking slide on the card adaptor to allow writes.
+* Once this has finished, you can make further copies using the same file for each device now - or you can return to your fleet page later and add more.
+* Plug your SD card into your Pi, connect your network (optional), HDMI and power cables and boot it.
+* You should see the logo boot screen on the device. This will stay for a few minutes while software is deployed to the unit. However you should see the new device appear almost immediately on your fleet dashboard with download progress and logs shown. If this doesn't happen, you may want to check the network connection.
+* The device may restart a few times while settings are applied, but once components have downloaded and are ready, the Samaritans Dashboard should load.
+
+> [!TIP]
+> Your screen resolution should be auto-detected, but if not, go to **Device Variables** for the specific device, **Add variable** set name to *WINDOW_SIZE* (in capitals) with a value of the desired resolution with a comma in between - eg. 1920,1080 or 3840,2160. Locate the correct value in your display documentation.
+
+## Upgrading
+
+If you are an existing user, there are a few benefits to upgrade - better support for newer displays and devices, no need to edit the HTML to replace your branch name (now done via configuration variable) and no need to have one more Pi than displays. All components now run together on each device.
+
+Due to the major changes involved, the recommended upgrade path is:
+
+* Retrieve the *THREERINGS_APIKEY* value from your current *nginx* fleet and any *WINDOW_SIZE* from *balena-dash* fleet devices. You may not need to set *WINDOW_SIZE* with the new version if auto-detect works as expected.
+* Follow the [Deployment](#deployment) section above to create a new single fleet.
+* Either write new SD cards for each device (preferable since you will probably also upgrade the host operating system) or move each device into the new fleet using the device's **Settings** page.
+* Apply manual *WINDOW_SIZE* device variable using previous value only if required.
 
 ## Customisation
 
-You will probably want to change our branch name at a minimum. This is found in this repo at html/index.html along with the majority of other items you may want to alter.
+The majority of changes you may want to make will be in app/html/index.html or associated CSS files.
 
 To change the breakpoint between the two screen modes change any reference to 3800px to a new value. Also change 3799px to a value one lower than your new setting.
 
 ## Testing
 
-To allow easy testing of the two resolution modes, you can use the files at http://YOUR.IP.ADDRESS.HERE/test_1080p.html and http://YOUR.IP.ADDRESS.HERE/test_4k.html.
+You can access the app directly at http://LOCAL.IP.ADDRESS/ and a screenshot of how the browser is displaying it at http://LOCAL.IP.ADDRESS:5011/screenshot
+Where LOCAL.IP.ADDRESS is the *LOCAL IP ADDRESS* value shown in the device page on balenaCloud.
+
+To allow easy testing of the two resolution modes, you can use the files at http://LOCAL.IP.ADDRESS/test_1080p.html and http://LOCAL.IP.ADDRESS/test_4k.html.
 
 ## Credits
 
