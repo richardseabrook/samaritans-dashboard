@@ -86,6 +86,7 @@ Due to the major changes involved, the recommended upgrade path is:
 * Follow the [Deployment](#deployment) section above to create a new single fleet.
 * Either write new SD cards for each device (preferable since you will probably also upgrade the host operating system) or move each device into the new fleet using the device's **Settings** page.
 * Apply manual *WINDOW_SIZE* device variable using previous value only if required.
+* You can then delete the redundant *nginx* and *balena-dash* fleets using their **Settings** page.
 
 ## Customisation
 
