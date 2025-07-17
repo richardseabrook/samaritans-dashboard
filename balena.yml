@@ -1,6 +1,6 @@
 name: samaritans-dashboard
 type: sw.application
-version: 2.0.1
+version: 2.0.2
 description: >-
   A status dashboard for Samaritans branches utilising Three Rings. It allows
   authorised users to post messages for others (via the 3R wiki), shows today's
