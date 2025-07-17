@@ -136,18 +136,23 @@
         </div>
         <script>
             $('#status').on("load", function() {
+              $(this).contents().find( "body.embed" ).css( "border", "0" );
+              $(this).contents().find( "body.embed" ).css( "padding", "0" );
+              $(this).contents().find( "head" ).append('<style>body:before, body:after { width: 0 !important }</style>');
+              $(this).contents().find( "main" ).css( "padding", "0" );
+
               $(this).contents().find( "span.waiting__label" ).html( "wait" );
               $(this).contents().find( "span.queue__label" ).html( "waiting" );
               $(this).contents().find( "p:not([id]) span.waiting__label" ).hide();
+              $(this).contents().find( ".bubble__tag" ).hide();
 
               if (window.matchMedia("(min-width: 3800px)").matches) {
-                $(this).contents().find( ".page-header__info" ).css( "font-size", "32px" );
-                $(this).contents().find( ".page-header__info h2" ).hide();
-                $(this).contents().find( ".bubble-copy__item p" ).css( "font-size", "32px" );
-                $(this).contents().find( "ul.status-bubbles" ).css( "margin-top", "60%" );
+                $(this).contents().find( ".page-header__info" ).hide();
+                $(this).contents().find( ".bubble-copy__item p" ).css( "font-size", "30px" );
+                $(this).contents().find( "ul.status-bubbles" ).css( "margin-top", "70%" );
               } else {
                 $(this).contents().find( ".page-header" ).hide();
-                $(this).contents().find( "ul.status-bubbles" ).css( "margin-top", "20px" );
+                $(this).contents().find( "ul.status-bubbles" ).css( "margin-top", "24px" );
               }
             });
 
