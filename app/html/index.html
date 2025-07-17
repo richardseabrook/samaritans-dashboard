@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="uk-width-1-6 uk-width-1-5@2xl" style="height: calc(100vh - 100px); overflow: hidden">
-                <iframe class="uk-width-1-1" id="status" scrolling="no" src="/intranet/status/" style="height: calc(100vh - 100px)"></iframe>
+                <iframe class="uk-width-1-1" id="status" scrolling="no" src="/embed/status/" style="height: calc(100vh - 100px)"></iframe>
             </div>
         </div>
         <script>
@@ -173,7 +173,7 @@
                   this.fetchEvents();
                   this.fetchMessages();
                   this.fetchShifts();
-                  document.getElementById('status').src = '/intranet/status/';
+                  document.getElementById('status').src = '/embed/status/';
                 },
                 async fetchEvents() {
                   try {

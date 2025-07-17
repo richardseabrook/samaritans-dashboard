@@ -20,10 +20,10 @@ server {
 		proxy_set_header Authorization "APIKEY ${THREERINGS_APIKEY}";
 		proxy_pass https://www.3r.org.uk/wiki/branchcommsscreens/all_pages.json;
 	}
-	location /intranet/status/ {
+	location /embed/status/ {
 		proxy_hide_header X-Frame-Options;
 		add_header X-Frame-Options "SAMEORIGIN";
-		proxy_pass https://dashboard.samaritans.org/intranet/status/;
+		proxy_pass https://dashboard.samaritans.org/embed/status/;
 	}
 	location /static/ {
 		proxy_pass https://dashboard.samaritans.org/static/;
