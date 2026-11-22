@@ -3,6 +3,10 @@ server {
 
 	root /var/www/html;
 
+	# send the hostname in the TLS handshake (SNI) when proxying - 3R refuses
+	# connections without it, and nginx leaves it off by default
+	proxy_ssl_server_name on;
+
 	location / {
 		ssi on;
 		set $ENV_SITE_NAME "$SITE_NAME";
