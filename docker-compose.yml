@@ -3,6 +3,13 @@ services:
 
   app:
     build: ./app
+    networks:
+      default:
+        aliases:
+          # 'app' is a top-level domain on Chromium's HSTS preload list, so Chromium
+          # loads http://app/ as https://app/, which nginx does not serve. a .local
+          # name is not on the list, so the browser reaches the container over http
+          - app.local
     ports:
       - '80'
     restart: always
@@ -11,7 +18,7 @@ services:
     depends_on:
       - app
     environment:
-      LAUNCH_URL: http://app/
+      LAUNCH_URL: http://app.local/
       KIOSK: 1
       ENABLE_GPU: 0
     image: bh.cr/balenalabs/browser-aarch64
